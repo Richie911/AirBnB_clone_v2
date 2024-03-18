@@ -11,7 +11,7 @@ from models.review import Review
 from models.amenity import Amenity
 
 storage_type = getenv("HBNB_TYPE_STORAGE")
-if storage_type is "db":
+if storage_type == "db":
     storage = DBStorage()
 else:
     storage = FileStorage()
