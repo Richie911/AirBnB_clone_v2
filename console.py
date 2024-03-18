@@ -118,7 +118,7 @@ class HBNBCommand(cmd.Cmd):
         data = args.split()
         arguments = {}
         for val in data:
-            if(HBNBCommand.classes.__contains__(val)):
+            if HBNBCommand.classes.__contains__(val):
                 continue
             else:
                 argv = val.split('=')
