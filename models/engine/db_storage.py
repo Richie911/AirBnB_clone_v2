@@ -37,7 +37,7 @@ class DBStorage:
                 obj[key] = val
 
         else:
-            classes = ['State', 'City', 'User', 'Place', 'Review', 'Amenity']
+            classes = [State, City, User, Place, Review, Amenity]
             for cl in classes:
                 query = self.__session.query(cl)
                 for val in query:
