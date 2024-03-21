@@ -115,27 +115,24 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
-        data = args.split()
-        arguments = {}
-        for val in data:
-            if HBNBCommand.classes.__contains__(val):
-                continue
-            else:
-                argv = val.split('=')
-                argv[1] = eval(argv[1])
-                if type(argv[1]) is str:
-                    argv[1] = argv[1].replace("_", " ").replace('"', '\\"')
-                arguments[argv[0]] = argv[1]
-        if not data[0]:
+        try:
+            if not args:
+                raise SyntaxError()
+            arg_list = args.split(" ")
+            kw = {}
+            for arg in arg_list[1:]:
+                arg_splited = arg.split("=")
+                arg_splited[1] = eval(arg_splited[1])
+                if type(arg_splited[1]) is str:
+                    arg_splited[1] = arg_splited[1].replace("_", " ").replace('"', '\\"')
+                kw[arg_splited[0]] = arg_splited[1]
+        except SyntaxError:
             print("** class name missing **")
-            return
-        elif data[0] not in HBNBCommand.classes:
+        except NameError:
             print("** class doesn't exist **")
-            return
-        new_instance = HBNBCommand.classes[data[0]](**arguments)
-        storage.save()
+        new_instance = HBNBCommand.classes[arg_list[0]](**kw)
+        new_instance.save()
         print(new_instance.id)
-        storage.save()
 
     def help_create(self):
         """ Help information for the create method """
@@ -219,10 +216,10 @@ class HBNBCommand(cmd.Cmd):
                 return
             for k, v in storage.all(HBNBCommand.classes[args]).items():
                 print_list.append(str(v))
-            else:
-                for k, v in storage.all().items():
-                    print_list.append(str(v))
-            print(print_list)
+        else:
+            for k, v in storage.all().items():
+                print_list.append(str(v))
+        print(print_list)
 
     def help_all(self):
         """ Help information for the all command """
@@ -328,7 +325,6 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
-
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
