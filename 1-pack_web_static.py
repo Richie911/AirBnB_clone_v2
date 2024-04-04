@@ -17,10 +17,11 @@ def do_pack():
         if not os.path.exists("versions"):
             os.makedirs("versions")
 
+        # Get the current date and time as a string
+        date_time_str = datetime.now().strftime('%Y%m%d%H%M%S')
+
         # Create the archive name based on current date and time
-        now = datetime.now()
-        archive_name = "versions/web_static_{}{}{}{}{}{}.tgz".format(
-            now.year, now.month, now.day, now.hour, now.minute, now.second)
+        archive_name = f'versions/web_static_{date_time_str}.tgz'
 
         # Compress the web_static folder into the archive
         local("tar -czvf {} web_static".format(archive_name))
