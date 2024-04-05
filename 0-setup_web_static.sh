@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-# Task that sets up the necessary directory structure, creates a test HTML file
-# Eestablishes a symbolic link for serving the latest static content, sets permissions
-# Updates the Nginx configuration to serve static files correctly on the web servers.
+# Task 0
 
 # Install Nginx if not already installed
 sudo apt-get update
