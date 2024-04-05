@@ -7,7 +7,7 @@ from fabric.api import env, put, run
 import os
 
 # Define the list of web servers
-env.hosts = ['18.204.16.143', '54.236.53.174']
+env.hosts = ['18.233.63.234', '3.83.18.150']
 
 
 def do_deploy(archive_path):
@@ -31,20 +31,20 @@ def do_deploy(archive_path):
         archive_filename = os.path.basename(archive_path).split('.')[0]
 
         # Create the folder for the new version
-        run('mkdir -p /data/web_static/releases/{}'.format(archive_filename))
+        run('sudo mkdir -p /data/web_static/releases/{}'.format(archive_filename))
 
         # Uncompress the archive to the folder on the web server
-        run('tar -xzf /tmp/{}.tgz -C /data/web_static/releases/{}/'.format(
+        run('sudo tar -xzf /tmp/{}.tgz -C /data/web_static/releases/{}/'.format(
             archive_filename, archive_filename))
 
         # Delete the archive from the web server
-        run('rm /tmp/{}.tgz'.format(archive_filename))
+        run('sudo rm /tmp/{}.tgz'.format(archive_filename))
 
         # Delete the symbolic link /data/web_static/current from the web server
-        run('rm -rf /data/web_static/current')
+        run('sudo rm -rf /data/web_static/current')
 
         # Create a new symbolic link linked to the new version of your code
-        run('ln -s /data/web_static/releases/{}/ /data/web_static/current'
+        run('sudo ln -s /data/web_static/releases/{}/ /data/web_static/current'
             .format(archive_filename))
 
         print('New version deployed!')

@@ -20,8 +20,8 @@ def do_pack():
 
     # Compress the web_static folder into the archive
     if os.path.isdir("versions") is False:
-        if local("mkdir -p versions").failed is True:
+        if local("sudo mkdir -p versions").failed is True:
             return None
-    if local("tar -czvf {} web_static".format(archive_name)).failed is True:
+    if local("sudo tar -czvf {} -C web_static .".format(archive_name)).failed is True:
         return None
     return archive_name
