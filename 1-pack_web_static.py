@@ -22,6 +22,6 @@ def do_pack():
     if os.path.isdir("versions") is False:
         if local("sudo mkdir -p versions").failed is True:
             return None
-    if local("sudo tar -czvf {} -C web_static .".format(archive_name)).failed is True:
+    if local("sudo tar -czvf {} -C web_static .".format(archive_name)).failed:
         return None
     return archive_name
