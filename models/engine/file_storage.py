@@ -36,6 +36,10 @@ class FileStorage:
             key = "{}.{}".format(type(obj).__name__, obj.id)
             self.__objects[key] = obj
 
+    def close(self):
+        """reload"""
+        self.reload()
+
     def save(self):
         """Saves storage dictionary to file"""
         my_dict = {}

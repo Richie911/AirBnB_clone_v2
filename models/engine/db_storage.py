@@ -50,6 +50,10 @@ class DBStorage:
                         key = '{}.{}'.format(type(obj).__name__, obj.id)
                         dictionary[key] = obj
             return dictionary
+        
+    def close(self):
+        """close session"""
+        self.__session.close()
 
     def new(self, obj):
         """Adds object to the current database session"""
