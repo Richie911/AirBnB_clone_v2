@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """ Starts flask application"""
 
 from flask import Flask, render_template
